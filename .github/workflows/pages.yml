@@ -1,0 +1,12 @@
+name: Binary Deployªon: pushkarruns-on: ubuntu-latest
+concurrency: get-content
+steps:
+- local phsen server
+- name: Deploy to Pages
+run: git clone out source files
+with strategy:
+  sha: ${{ strat.sha }}
+layout: files
+- use: GitHub/ActionsCheckout#v4
+- use: GitHub/actions-build-pages@1
+}
