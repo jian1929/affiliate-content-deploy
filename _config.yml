@@ -1,0 +1,14 @@
+theme: jekyll-theme-slate
+markdown: kramdown
+highlighter: none
+safe: true
+lsi: false
+future: true
+paginate: 1
+exclude:
+  - .github
+  - node_modules
+  - package.json
+  - package-lock.json
+  - deploy.sh
+  - upload-to-github.sh
