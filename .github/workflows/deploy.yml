@@ -1,1 +1,32 @@
-name: Deploy
+name: Deploy to GitHub Pages
+
+on:
+  push:
+  repository_dispatch:
+    types: [deploy]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Setup Pages
+        uses: actions/configure-pages@v4
+      - name: Upload artifact
+        run: |
+          mkdir -p _site
+          cp *.html *.xml *.txt *.json _site/ 2>/dev/null || true
+          cp -r blog _site/ 2>/dev/null || true
+          ls -laR _site/ | head -50
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: '_site'
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
